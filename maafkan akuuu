@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>maafin yah</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ffb6b9, #fae3d9, #bbded6, #8ac6d1);
+      animation: gradientMove 5s infinite alternate;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    .sorry-box {
+      background: rgba(255,255,255,0.8);
+      padding: 40px 60px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .sorry-text {
+      font-size: 2.5em;
+      color: #ff6f91;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      animation: shake 1s infinite alternate;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(8px); }
+    }
+    .desc {
+      font-size: 1.2em;
+      color: #333;
+      font-family: 'Segoe UI', 'Arial', sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <div class="sorry-box">
+    <div class="sorry-text">maafin akuu yah hehehe</div>
+    <div class="desc">maaf yahh aku becandanya tidak lucu yah😢.</div>
+  </div>
