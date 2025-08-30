@@ -1,0 +1,407 @@
+<index.html>
+    <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>untuk sipaaa</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ffeef8, #fff0f5);
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+        }
+
+        .character {
+            position: relative;
+            z-index: 10;
+            margin-bottom: 20px;
+        }
+
+        .stick-figure {
+            width: 80px;
+            height: 80px;
+            border: 3px solid #333;
+            border-radius: 50%;
+            background: white;
+            position: relative;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .face {
+            position: relative;
+        }
+
+        .eyes {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .eye {
+            width: 4px;
+            height: 4px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        .mouth {
+            width: 20px;
+            height: 10px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .blush {
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: #ffb3d9;
+            border-radius: 50%;
+            top: 15px;
+        }
+
+        .blush.left {
+            left: -18px;
+        }
+
+        .blush.right {
+            right: -18px;
+        }
+
+        .arm {
+            position: absolute;
+            top: 85px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #333;
+            border-radius: 2px;
+            transform-origin: left center;
+            animation: wave 1.5s ease-in-out infinite;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -20px;
+            right: -40px;
+            background: #ff99cc;
+            padding: 5px 10px;
+            border-radius: 15px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            opacity: 0;
+            animation: showBubble 0.5s ease-in-out 1s forwards;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 10px solid transparent;
+            border-right-color: #ff99cc;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 400px;
+            height: 350px;
+            margin: 0 auto;
+        }
+
+        .heart-row {
+            display: flex;
+            justify-content: center;
+            margin: 2px 0;
+        }
+
+        .heart {
+            width: 20px;
+            height: 18px;
+            background: #e91e63;
+            margin: 1px;
+            position: relative;
+            transform: rotate(-45deg) scale(0);
+            animation: heartAppear 0.3s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 20px;
+            height: 18px;
+            position: absolute;
+            left: 10px;
+            top: 0;
+            background: #e91e63;
+            border-radius: 10px 10px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .love-text {
+            font-size: 48px;
+            color: #e91e63;
+            font-weight: bold;
+            margin-top: 30px;
+            opacity: 0;
+            animation: textAppear 1s ease-in-out 3s forwards;
+            text-shadow: 2px 2px 4px rgba(233, 30, 99, 0.3);
+        }
+
+        .restart-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px 24px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .restart-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes heartAppear {
+            to {
+                transform: rotate(-45deg) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes textAppear {
+            to {
+                opacity: 1;
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(15deg); }
+        }
+
+        @keyframes showBubble {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .floating-heart {
+            position: absolute;
+            width: 12px;
+            height: 10px;
+            background: #ff69b4;
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-heart:before,
+        .floating-heart:after {
+            content: '';
+            width: 12px;
+            height: 10px;
+            position: absolute;
+            left: 6px;
+            top: 0;
+            background: #ff69b4;
+            border-radius: 6px 6px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .floating-heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes float {
+            0% {
+                transform: rotate(-45deg) translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: rotate(-45deg) translateY(90vh) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: rotate(-45deg) translateY(-10vh) scale(1);
+            }
+            100% {
+                transform: rotate(-45deg) translateY(-20vh) scale(0);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
+    <div class="container">
+        <div class="character">
+            <div class="stick-figure">
+                <div class="face">
+                    <div class="eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="mouth"></div>
+                </div>
+                <div class="blush left"></div>
+                <div class="blush right"></div>
+                <div class="speech-bubble">piu</div>
+            </div>
+            <div class="arm"></div>
+        </div>
+
+        <div class="heart-container" id="heartContainer">
+        </div>
+
+        <div class="love-text">semangatt sipaaaa😝</div>
+    </div>
+
+    <button class="restart-btn" onclick="restartAnimation()">Ulangi Animasi</button>
+
+    <script>
+        // Pola hati dalam bentuk array 2D
+        const heartPattern = [
+            [0,0,0,1,1,1,0,0,0,1,1,1,0,0,0],
+            [0,0,1,1,1,1,1,0,1,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,1,1,1,1,1,1,1,1,1,1,1,1,1,0],
+            [0,0,1,1,1,1,1,1,1,1,1,1,1,0,0],
+            [0,0,0,1,1,1,1,1,1,1,1,1,0,0,0],
+            [0,0,0,0,1,1,1,1,1,1,1,0,0,0,0],
+            [0,0,0,0,0,1,1,1,1,1,0,0,0,0,0],
+            [0,0,0,0,0,0,1,1,1,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
+        ];
+
+        function createHeartShape() {
+            const container = document.getElementById('heartContainer');
+            container.innerHTML = '';
+            
+            let delay = 0.2;
+            
+            heartPattern.forEach((row, rowIndex) => {
+                const heartRow = document.createElement('div');
+                heartRow.className = 'heart-row';
+                
+                row.forEach((cell, colIndex) => {
+                    const heartElement = document.createElement('div');
+                    
+                    if (cell === 1) {
+                        heartElement.className = 'heart';
+                        heartElement.style.animationDelay = `${delay}s`;
+                        delay += 0.05;
+                    } else {
+                        heartElement.style.width = '20px';
+                        heartElement.style.height = '18px';
+                        heartElement.style.margin = '1px';
+                        heartElement.style.opacity = '0';
+                    }
+                    
+                    heartRow.appendChild(heartElement);
+                });
+                
+                container.appendChild(heartRow);
+            });
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    if (heart.parentNode) {
+                        heart.parentNode.removeChild(heart);
+                    }
+                }, 7000);
+            }, 800);
+        }
+
+        function restartAnimation() {
+            // Reset semua animasi
+            document.querySelectorAll('.heart').forEach(heart => {
+                heart.style.animation = 'none';
+            });
+            
+            document.querySelector('.love-text').style.animation = 'none';
+            
+            // Restart setelah delay singkat
+            setTimeout(() => {
+                createHeartShape();
+                document.querySelector('.love-text').style.animation = 'textAppear 1s ease-in-out 3s forwards';
+            }, 100);
+        }
+
+        // Inisialisasi saat halaman dimuat
+        window.addEventListener('load', () => {
+            createHeartShape();
+            setTimeout(createFloatingHearts, 2000);
+        });
+    </script>
+</body>
+</html>
